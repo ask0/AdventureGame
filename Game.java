@@ -21,7 +21,7 @@ public class Game {
                 System.out.println("# Locations");
                 System.out.println("1- Safe House");
                 System.out.println("2- Tool Store");
-
+                System.out.println("3- Cave");
                 System.out.println("0- Quit Game");
                 System.out.print("-> Chose where you want to go: ");
                 int selectLoc = scanner.nextInt();
@@ -37,6 +37,10 @@ public class Game {
                     }
                     case 2 -> {
                         location = new ToolStore(player);
+                        isContinue = false;
+                    }
+                    case 3 -> {
+                        location = new Cave(player);
                         isContinue = false;
                     }
                     default -> System.out.println("!! Wrong input. Try again. ");
