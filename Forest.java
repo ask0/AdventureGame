@@ -1,4 +1,3 @@
-import Obstacles.Obstacle;
 import Obstacles.Vampire;
 
 public class Forest extends BattleLoc {

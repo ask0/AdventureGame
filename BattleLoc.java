@@ -1,4 +1,3 @@
-import Armors.Armor;
 import Armors.HeavyArmor;
 import Armors.LightArmor;
 import Armors.MediumArmor;
@@ -6,7 +5,6 @@ import Obstacles.Obstacle;
 import Weapons.Gun;
 import Weapons.Rifle;
 import Weapons.Sword;
-import Weapons.Weapon;
 
 import java.util.Random;
 
@@ -23,7 +21,7 @@ public class BattleLoc extends Location {
     }
 
     @Override
-    protected boolean onLocation() {
+    public boolean onLocation() {
         int obsNumber = this.randomObstacleNumber();
         if (this.getName().equals("Cave") && this.getPlayer().getInventory().isFood()) {
             System.out.println("# You already killed all enemies in the " + this.getName());
@@ -38,7 +36,7 @@ public class BattleLoc extends Location {
             boolean isContinue = true;
             while (isContinue) {
                 System.out.print("-> <F>ight or <R>un: ");
-                String selectCase = scanner.nextLine();
+                String selectCase = Location.scanner.nextLine();
                 selectCase = selectCase.toUpperCase();
                 switch (selectCase) {
                     case "F" -> {
@@ -95,7 +93,7 @@ public class BattleLoc extends Location {
             obstacleStats();
             while (this.getPlayer().getHealth() > 0 && this.getObstacle().getHealth() > 0) {
                 System.out.print("-> <F>ight or <R>un: ");
-                String selectCombat = scanner.nextLine().toUpperCase();
+                String selectCombat = Location.scanner.nextLine().toUpperCase();
                 if (selectCombat.equals("F")) {
                     if (whoseTurn) { // if true, player starts to fight
                         System.out.println("# You hit the " + this.getObstacle().getName());
@@ -166,25 +164,39 @@ public class BattleLoc extends Location {
         int tryChance2 = random.nextInt(100) + 1;
         if (tryChance <= 15) { // Chance to win gun
             if (tryChance2 <= 20) { // Win rifle
-                this.getPlayer().getInventory().setWeapon(new Rifle());
-                System.out.println("# You win Rifle");
+                if (this.getPlayer().getInventory().getWeapon().getDamage() < new Rifle().getDamage()) {
+                    this.getPlayer().getInventory().setWeapon(new Rifle());
+                    System.out.println("# You win Rifle");
+                } else System.out.println("# You win Rifle but you already have better weapon..");
             } else if (tryChance2 <= 50) { // Win sword
-                this.getPlayer().getInventory().setWeapon(new Sword());
-                System.out.println("# You win Sword");
+                if (this.getPlayer().getInventory().getWeapon().getDamage() < new Sword().getDamage()) {
+                    this.getPlayer().getInventory().setWeapon(new Sword());
+                    System.out.println("# You win Sword");
+                } else System.out.println("# You win Sword but you already have better weapon..");
             } else { // Win gun
-                this.getPlayer().getInventory().setWeapon(new Gun());
-                System.out.println("# You win Gun");
+                if (this.getPlayer().getInventory().getWeapon().getDamage() < new Gun().getDamage()) {
+                    this.getPlayer().getInventory().setWeapon(new Gun());
+                    System.out.println("# You win Gun");
+                } else System.out.println("# You win Gun but you already have better weapon..");
             }
         } else if (tryChance <= 30) { // Chance to win armor
             if (tryChance2 <= 20) { // Win heavy armor
-                this.getPlayer().getInventory().setArmor(new HeavyArmor());
-                System.out.println("# You win Heavy Armor");
+                if (this.getPlayer().getInventory().getArmor().getBlock() < new HeavyArmor().getBlock()) {
+                    this.getPlayer().getInventory().setArmor(new HeavyArmor());
+                    System.out.println("# You win Heavy Armor");
+                } else System.out.println("# You win Heavy Armor you already have better armor..");
+
             } else if (tryChance2 <= 50) { // Win medium armor
-                this.getPlayer().getInventory().setArmor(new MediumArmor());
-                System.out.println("# You win Medium Armor");
+                if (this.getPlayer().getInventory().getArmor().getBlock() < new MediumArmor().getBlock()) {
+                    this.getPlayer().getInventory().setArmor(new MediumArmor());
+                    System.out.println("# You win Medium Armor");
+                } else System.out.println("# You win Medium Armor you already have better armor..");
+
             } else { // Win light armor
-                this.getPlayer().getInventory().setArmor(new LightArmor());
-                System.out.println("# You win Light Armor");
+                if (this.getPlayer().getInventory().getArmor().getBlock() < new LightArmor().getBlock()) {
+                    this.getPlayer().getInventory().setArmor(new LightArmor());
+                    System.out.println("# You win Light Armor");
+                } else System.out.println("# You win Light Armor you already have better armor..");
             }
         } else if (tryChance <= 55) { // Chance to win money
             if (tryChance2 <= 20) { // Win 10 money

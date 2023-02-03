@@ -1,5 +1,4 @@
 import Obstacles.Bear;
-import Obstacles.Obstacle;
 
 public class River extends BattleLoc {
     public River(Player player) {

@@ -18,7 +18,7 @@ public abstract class Location {
         this.player = player;
     }
 
-    protected abstract boolean onLocation();
+    public abstract boolean onLocation();
 
     public String getName() {
         return name;

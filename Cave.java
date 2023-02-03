@@ -1,4 +1,3 @@
-import Obstacles.Obstacle;
 import Obstacles.Zombie;
 
 public class Cave extends BattleLoc {
