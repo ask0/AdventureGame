@@ -15,15 +15,21 @@ public class Game {
         while (!isQuit) {
             boolean isContinue = true;
             while (isContinue) {
+                if (player.getInventory().isFood() && player.getInventory().isFirewood() && player.getInventory().isWater()) {
+                    System.out.println("# You've killed all the enemies in the game. Try the Quarry(6)");
+                    isContinue = false;
+
+                }
                 System.out.println("#################################################################");
                 player.printInfo();
-
+                System.out.println("#################################################################");
                 System.out.println("# Locations");
                 System.out.println("1- Safe House");
                 System.out.println("2- Tool Store");
                 System.out.println("3- Cave");
                 System.out.println("4- Forest");
                 System.out.println("5- River");
+                System.out.println("6- Quarry");
                 System.out.println("0- Quit Game");
                 System.out.print("-> Chose where you want to go: ");
 
@@ -54,10 +60,15 @@ public class Game {
                         location = new River(player);
                         isContinue = false;
                     }
+                    case 6 -> {
+                        location = new Quarry(player);
+                        isContinue = false;
+                    }
                     default -> System.out.println("!! Wrong input. Try again. ");
                 }
 
             }
+
             if (isQuit)
                 break;
             if (!location.onLocation()) {

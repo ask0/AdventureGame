@@ -10,7 +10,7 @@ public class Player {
     private String name;
     private Scanner scanner = new Scanner(System.in);
     private Inventory inventory;
-    private final int defaultHealth = health;
+    private int defaultHealth;
 
     public Player(String name) {
         this.name = name;
@@ -43,6 +43,8 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        if (health <= 0)
+            health = 0;
         this.health = health;
     }
 
@@ -67,8 +69,12 @@ public class Player {
     }
 
 
+    public void setDefaultHealth(int defaultHealth) {
+        this.defaultHealth = defaultHealth;
+    }
+
     public void selectChar() {
-        GameChar[] charList = {new Samurai(), new Knight(), new Archer()};
+        GameChar[] charList = {new Samurai(), new Archer(), new Knight()};
         System.out.println("#####################    Characters    ##########################");
         for (GameChar gameChar : charList) {
             System.out.println("# ID: " + gameChar.getId() + "\tCharacter: " + gameChar.getName() + "\tDamage: " + gameChar.getDamage() + "\tHealth: " + gameChar.getHealth() + "\tMoney: " + gameChar.getMoney());
@@ -114,6 +120,7 @@ public class Player {
         this.setDamage(gameChar.getDamage());
         this.setHealth(gameChar.getHealth());
         this.setMoney(gameChar.getMoney());
+        this.setDefaultHealth(gameChar.getHealth());
     }
 
 }
