@@ -72,18 +72,34 @@ public class BattleLoc extends Location {
                         this.getPlayer().setHealth(this.getPlayer().getHealth() - obstacleDamage);
                         afterHit();
                     }
+                } else {
+                    return false;
                 }
             }
             if (this.getPlayer().getHealth() <= 0) {
                 return false;
             }
+            /*
+            if (this.getObstacle().getHealth() < this.getPlayer().getHealth()) {
+                System.out.println("# You've killed the enemy!");
+                System.out.println("# You win " + this.getObstacle().getAward() + " coins.");
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                System.out.println("# Current money: " + this.getPlayer().getMoney());
+            }
+            */
             if (this.getObstacle().getHealth() <= 0 && (obsNumber - i == 1)) {
                 System.out.println("# You've killed all the enemies!");
+                System.out.println("# You win " + this.getObstacle().getAward() + " coins.");
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                System.out.println("# Current money: " + this.getPlayer().getMoney());
             } else if (this.getObstacle().getHealth() <= 0) {
                 System.out.println("# You've killed " + (i + 1) + " " + this.getObstacle().getName() + " " + (obsNumber - i - 1) + " more left");
+                System.out.println("# You win " + this.getObstacle().getAward() + " coins.");
+                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                System.out.println("# Current money: " + this.getPlayer().getMoney());
             }
         }
-        return false;
+        return true;
     }
 
     public void afterHit() {
