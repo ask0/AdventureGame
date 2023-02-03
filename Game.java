@@ -22,8 +22,11 @@ public class Game {
                 System.out.println("1- Safe House");
                 System.out.println("2- Tool Store");
                 System.out.println("3- Cave");
+                System.out.println("4- Forest");
+                System.out.println("5- River");
                 System.out.println("0- Quit Game");
                 System.out.print("-> Chose where you want to go: ");
+
                 int selectLoc = scanner.nextInt();
                 switch (selectLoc) {
                     case 0 -> {
@@ -43,9 +46,17 @@ public class Game {
                         location = new Cave(player);
                         isContinue = false;
                     }
+                    case 4 -> {
+                        location = new Forest(player);
+                        isContinue = false;
+                    }
+                    case 5 -> {
+                        location = new River(player);
+                        isContinue = false;
+                    }
                     default -> System.out.println("!! Wrong input. Try again. ");
-
                 }
+
             }
             if (isQuit)
                 break;

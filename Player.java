@@ -10,10 +10,12 @@ public class Player {
     private String name;
     private Scanner scanner = new Scanner(System.in);
     private Inventory inventory;
+    private final int defaultHealth = health;
 
     public Player(String name) {
         this.name = name;
         this.inventory = new Inventory();
+
     }
 
     public Inventory getInventory() {
@@ -25,6 +27,10 @@ public class Player {
     }
 
     public int getDamage() {
+        return damage;
+    }
+
+    public int getTotalDamage() {
         return damage + this.getInventory().getWeapon().getDamage();
     }
 
@@ -55,6 +61,11 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getDefaultHealth() {
+        return defaultHealth;
+    }
+
 
     public void selectChar() {
         GameChar[] charList = {new Samurai(), new Knight(), new Archer()};
@@ -92,10 +103,10 @@ public class Player {
     }
 
     public void printInfo() {
-        System.out.println("# Stats | Character: " + this.getName() + "\tDamage: " + (this.getDamage() - this.getInventory().getWeapon().getDamage()) + "\tHealth: " + this.getHealth() + "\tMoney: " + this.getMoney());
+        System.out.println("# Stats | Character: " + this.getName() + "\tDamage: " + this.getDamage() + "\tHealth: " + this.getHealth() + "\tMoney: " + this.getMoney());
         System.out.println("# Stats | Weapon: " + this.getInventory().getWeapon().getName() + "\tDamage: " + this.getInventory().getWeapon().getDamage() + "\tMoney: " + this.getInventory().getWeapon().getMoney());
         System.out.println("# Stats | Armor: " + this.getInventory().getArmor().getName() + "\tBlock: " + this.getInventory().getArmor().getBlock() + "\tMoney: " + this.getInventory().getArmor().getMoney());
-        System.out.println("# Total Stats: " + "\tDamage: " + this.getDamage() + "\tBlock: " + this.getInventory().getArmor().getBlock() + "\tHealth: " + this.getHealth() + "\tMoney: " + this.getMoney());
+        System.out.println("# Total Stats: " + "\tDamage: " + this.getTotalDamage() + "\tBlock: " + this.getInventory().getArmor().getBlock() + "\tHealth: " + this.getHealth() + "\tMoney: " + this.getMoney());
     }
 
     public void initPlayer(GameChar gameChar) {
@@ -104,6 +115,5 @@ public class Player {
         this.setHealth(gameChar.getHealth());
         this.setMoney(gameChar.getMoney());
     }
-
 
 }
